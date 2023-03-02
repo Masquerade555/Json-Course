@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div id="Title">Content from Json</div>
+    <div id="id01"></div>
+
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "Untitled-1.json";
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var myArray = JSON.parse(xmlhttp.responseText);
+                var design = "<table><tr><th>Title</th><th>Description</th></tr>";
+                var format = "<tr><th>Title</th><th>Description</th></tr>";
+
+                for (var key in myArray) {
+                    var obj = myArray[key];
+                    var out = format.replace("Title", obj.title).replace("Description", obj.description);
+                    design = design + out;
+                }
+                design = design + "</table>";
+                document.getElementById("id01").innerHTML = design;
+
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+    </script>
+
+</body>
+
+</html>
